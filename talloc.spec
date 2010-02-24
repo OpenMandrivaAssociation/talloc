@@ -1,7 +1,7 @@
 %define tallocmajor 2
 %define libtalloc %mklibname talloc %tallocmajor
 %define tallocdevel %mklibname -d talloc
-%define epoch 1
+%define  epoch 1
 
 Name: talloc
 Version: 2.0.1
@@ -30,7 +30,7 @@ Library implementing Samba's memory allocator
 %package -n %tallocdevel
 Group: Development/C
 Summary: Library implementing Samba's memory allocator
-Provides: talloc-devel = %eopch:%{version}-%{release}
+Provides: talloc-devel = %epoch:%{version}-%{release}
 Requires: %libtalloc = %epoch:%{version}-%{release}
 BuildRequires: swig
 
