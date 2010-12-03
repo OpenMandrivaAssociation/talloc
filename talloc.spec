@@ -5,7 +5,7 @@
 
 Name: talloc
 Version: 2.0.1
-Release: %mkrel 1
+Release: %mkrel 2
 URL: http://talloc.samba.org
 Source: http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
 #Source1: http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz.asc
