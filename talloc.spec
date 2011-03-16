@@ -7,7 +7,7 @@
 
 Name: talloc
 Version: 2.0.5
-Release: %mkrel 1
+Release: %mkrel 2
 URL: http://talloc.samba.org
 Source: http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
 #Source1: http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz.asc
@@ -16,7 +16,7 @@ License: GPLv3
 Epoch: %epoch
 Summary: Library implementing Samba's memory allocator
 Group: System/Libraries
-BuildRequires: acl-devel xsltproc docbook-style-xsl
+BuildRequires: acl-devel xsltproc docbook-style-xsl docbook-dtd42-xml
 BuildRequires: python-devel
 BuildRoot: %{_tmppath}/%{name}-root
 
