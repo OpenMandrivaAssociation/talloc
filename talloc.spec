@@ -17,7 +17,6 @@ Epoch: %epoch
 Summary: Library implementing Samba's memory allocator
 Group: System/Libraries
 BuildRequires: acl-devel xsltproc docbook-style-xsl
-BuildRequires: waf
 BuildRoot: %{_tmppath}/%{name}-root
 
 %description
@@ -65,7 +64,7 @@ Utility functions for using talloc objects with Python
 %setup -q
 
 %build
-%configure_waf
+%configure2_5x
 %make
 
 %install
