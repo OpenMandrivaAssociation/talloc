@@ -17,6 +17,7 @@ Epoch: %epoch
 Summary: Library implementing Samba's memory allocator
 Group: System/Libraries
 BuildRequires: acl-devel xsltproc docbook-style-xsl
+BuildRequires: python-devel
 BuildRoot: %{_tmppath}/%{name}-root
 
 %description
