@@ -65,6 +65,7 @@ Utility functions for using talloc objects with Python
 %setup -q
 
 %build
+export PYTHONDIR=%{py_platsitedir}
 %configure2_5x
 %make
 
