@@ -2,12 +2,12 @@
 %define libtalloc %mklibname talloc %tallocmajor
 %define tallocdevel %mklibname -d talloc
 %define  epoch 1
-%define libpytalloc %mklibname pylibtalloc-util 2
-%define libpytallocdevel %mklibname -d pylibtalloc-util
+%define libpytalloc %mklibname pytalloc-util 2
+%define libpytallocdevel %mklibname -d pytalloc-util
 
 Name: talloc
 Version: 2.0.5
-Release: %mkrel 1
+Release: %mkrel 2
 URL: http://talloc.samba.org
 Source: http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
 #Source1: http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz.asc
@@ -57,6 +57,8 @@ Utility functions for using talloc objects with Python
 %package -n %libpytallocdevel
 Group: Development/C
 Summary: Utility functions for using talloc objects with Python
+Requires: %libpytalloc = %epoch:%version
+Provides: pytalloc-util-devel = %version-%release
 
 %description -n %libpytallocdevel
 Utility functions for using talloc objects with Python
