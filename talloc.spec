@@ -4,13 +4,23 @@
 %define  epoch 1
 %define libpytalloc %mklibname pytalloc-util 2
 %define libpytallocdevel %mklibname -d pytalloc-util
+%define check_sig() export GNUPGHOME=%{_tmppath}/rpm-gpghome \
+if [ -d "$GNUPGHOME" ] \
+then echo "Error, GNUPGHOME $GNUPGHOME exists, remove it and try again"; exit 1 \
+fi \
+install -d -m700 $GNUPGHOME \
+gpg --import %{1} \
+gpg --trust-model always --verify %{2} \
+rm -Rf $GNUPGHOME \
+
 
 Name: talloc
-Version: 2.0.5
-Release: %mkrel 2
+Version: 2.0.7
+Release: %mkrel 1
 URL: http://talloc.samba.org
 Source: http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
-#Source1: http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz.asc
+Source1: http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.asc
+Source2: samba-bugs.asc
 License: GPLv3
 # tallocversion was not used when in samba4, so it was 4.0.0
 Epoch: %epoch
@@ -64,6 +74,16 @@ Provides: pytalloc-util-devel = %version-%release
 Utility functions for using talloc objects with Python
 
 %prep
+
+#Try and validate signatures on source:
+VERIFYSOURCE=%{SOURCE0}
+VERIFYSOURCE=${VERIFYSOURCE%%.gz}
+gzip -dc %{SOURCE0} > $VERIFYSOURCE
+
+%check_sig %{SOURCE2} %{SOURCE1} $VERIFYSOURCE
+
+rm -f $VERIFYSOURCE
+
 %setup -q
 
 %build
