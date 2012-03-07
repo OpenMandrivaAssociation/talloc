@@ -90,6 +90,7 @@ export PYTHONDIR=%{py_platsitedir}
 
 %install
 %makeinstall_std
+chmod +x %{buildroot}{%{_libdir}/lib*.so.%{tallocmajor}*,%{py_platsitedir}/talloc.so}
 
 %files -n %{libtalloc}
 %{_libdir}/libtalloc.so.%{tallocmajor}*
