@@ -86,7 +86,7 @@ chmod +r -R .
 
 %build
 export PYTHONDIR=%{py_platsitedir}
-%configure2_5x
+%configure2_5x	--disable-rpath
 %make
 
 %install
