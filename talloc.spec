@@ -71,7 +71,6 @@ Provides:	pytalloc-util-devel = %{version}-%{release}
 Utility functions for using talloc objects with Python
 
 %prep
-
 #Try and validate signatures on source:
 VERIFYSOURCE=%{SOURCE0}
 VERIFYSOURCE=${VERIFYSOURCE%%.gz}
@@ -85,7 +84,6 @@ rm -f $VERIFYSOURCE
 chmod +r -R .
 
 %build
-export PYTHONDIR=%{py_platsitedir}
 %configure2_5x	--disable-rpath
 %make
 
