@@ -14,7 +14,7 @@ rm -Rf $GNUPGHOME \
 
 Name:		talloc
 Version:	2.0.7
-Release:	1
+Release:	2
 URL:		http://talloc.samba.org
 Source0:	http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
 Source1:	http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.asc
