@@ -82,6 +82,7 @@ gzip -dc %{SOURCE0} > $VERIFYSOURCE
 rm -f $VERIFYSOURCE
 
 %setup -q
+chmod +r -R .
 
 %build
 export PYTHONDIR=%{py_platsitedir}
