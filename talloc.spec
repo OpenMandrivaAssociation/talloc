@@ -40,8 +40,8 @@ Library implementing Samba's memory allocator
 %package -n	%{tallocdev}
 Group:		Development/C
 Summary:	Library implementing Samba's memory allocator
-Provides:	talloc-devel = %{epoch}:%{version}-%{release}
-Requires:	%{libtalloc} = %{epoch}:%{version}-%{release}
+Provides:	talloc-devel = %{EVRD}
+Requires:	%{libtalloc} = %{EVRD}
 BuildRequires:	swig
 
 %description -n	%{tallocdev}
@@ -64,7 +64,7 @@ Utility functions for using talloc objects with Python
 %package -n	%{libpytallocdev}
 Group:		Development/C
 Summary:	Utility functions for using talloc objects with Python
-Requires:	%{libpytalloc} = %{epoch}:%{version}
+Requires:	%{libpytalloc} = %{EVRD}
 Provides:	pytalloc-util-devel = %{version}-%{release}
 
 %description -n %{libpytallocdev}
