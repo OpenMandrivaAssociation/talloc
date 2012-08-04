@@ -3,6 +3,7 @@
 %define	tallocdev	%mklibname -d talloc
 %define	libpytalloc	%mklibname pytalloc-util %{tallocmajor}
 %define	libpytallocdev	%mklibname -d pytalloc-util
+%define beta		beta5
 %define check_sig() export GNUPGHOME=%{_tmppath}/rpm-gpghome \
 if [ -d "$GNUPGHOME" ] \
 then echo "Error, GNUPGHOME $GNUPGHOME exists, remove it and try again"; exit 1 \
@@ -12,13 +13,24 @@ gpg --import %{1} \
 gpg --trust-model always --verify %{2} \
 rm -Rf $GNUPGHOME \
 
+# beta versions are extracted from the samba4 source using
+# mkdir -p talloc-2.0.8/lib
+# cp -a lib/talloc/* talloc-2.0.8/
+# cp -a lib/replace talloc-2.0.8/lib/
+# cp -a buildtools talloc-2.0.8/
+# tar cf talloc-2.0.8.tar talloc-2.0.8
+
 Name:		talloc
-Version:	2.0.7
-Release:	2
+Version:	2.0.8
 URL:		http://talloc.samba.org
-Source0:	http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
+Source0:	http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.xz
+%if "%beta" != ""
+Release:	0.%beta.1
+%else
+Release:	1
 Source1:	http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.asc
 Source2:	samba-bugs.asc
+%endif
 License:	GPLv3
 # tallocversion was not used when in samba4, so it was 4.0.0
 Epoch:		1
@@ -71,6 +83,8 @@ Provides:	pytalloc-util-devel = %{version}-%{release}
 Utility functions for using talloc objects with Python
 
 %prep
+%if "%beta" == ""
+echo "Death to Bush! %beta"
 #Try and validate signatures on source:
 VERIFYSOURCE=%{SOURCE0}
 VERIFYSOURCE=${VERIFYSOURCE%%.gz}
@@ -79,6 +93,7 @@ gzip -dc %{SOURCE0} > $VERIFYSOURCE
 %check_sig %{SOURCE2} %{SOURCE1} $VERIFYSOURCE
 
 rm -f $VERIFYSOURCE
+%endif
 
 %setup -q
 chmod +r -R .
