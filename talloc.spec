@@ -3,7 +3,7 @@
 %define	tallocdev	%mklibname -d talloc
 %define	libpytalloc	%mklibname pytalloc-util %{tallocmajor}
 %define	libpytallocdev	%mklibname -d pytalloc-util
-%define beta		beta6
+%define beta		beta5
 %define check_sig() export GNUPGHOME=%{_tmppath}/rpm-gpghome \
 if [ -d "$GNUPGHOME" ] \
 then echo "Error, GNUPGHOME $GNUPGHOME exists, remove it and try again"; exit 1 \
