@@ -3,7 +3,7 @@
 %define	tallocdev	%mklibname -d talloc
 %define	libpytalloc	%mklibname pytalloc-util %{tallocmajor}
 %define	libpytallocdev	%mklibname -d pytalloc-util
-%define beta		beta5
+%define beta		%nil
 %define check_sig() export GNUPGHOME=%{_tmppath}/rpm-gpghome \
 if [ -d "$GNUPGHOME" ] \
 then echo "Error, GNUPGHOME $GNUPGHOME exists, remove it and try again"; exit 1 \
@@ -23,7 +23,7 @@ rm -Rf $GNUPGHOME \
 Name:		talloc
 Version:	2.0.8
 URL:		http://talloc.samba.org
-Source0:	http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.xz
+Source0:	http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
 %if "%beta" != ""
 Release:	0.%beta.1
 %else
