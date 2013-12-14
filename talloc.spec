@@ -21,7 +21,7 @@ rm -Rf $GNUPGHOME \
 # tar cf talloc-2.0.8.tar talloc-2.0.8
 
 Name:		talloc
-Version:	2.0.8
+Version:	2.1.0
 URL:		http://talloc.samba.org
 Source0:	http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
 %if "%beta" != ""
@@ -99,7 +99,8 @@ rm -f $VERIFYSOURCE
 chmod +r -R .
 
 %build
-%configure2_5x	--disable-rpath
+%setup_compile_flags
+./configure --prefix=%{_prefix} --libdir=%{_libdir}
 %make
 
 %install
