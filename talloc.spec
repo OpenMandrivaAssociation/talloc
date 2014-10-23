@@ -27,7 +27,7 @@ Source0:	http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
 %if "%beta" != ""
 Release:	0.%beta.1
 %else
-Release:	11
+Release:	12
 Source1:	http://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.asc
 Source2:	samba-bugs.asc
 %endif
@@ -36,8 +36,10 @@ License:	GPLv3
 Epoch:		1
 Summary:	Library implementing Samba's memory allocator
 Group:		System/Libraries
-BuildRequires:	acl-devel xsltproc docbook-style-xsl
-BuildRequires:	python-devel
+BuildRequires:	acl-devel
+BuildRequires:	xsltproc
+BuildRequires:	docbook-style-xsl
+BuildRequires:	pkgconfig(python2)
 
 %description
 Library implementing Samba's memory allocator
@@ -99,13 +101,14 @@ rm -f $VERIFYSOURCE
 chmod +r -R .
 
 %build
+export PYTHON=%{__python2}
 %setup_compile_flags
 ./configure --prefix=%{_prefix} --libdir=%{_libdir}
 %make
 
 %install
 %makeinstall_std
-chmod +x %{buildroot}{%{_libdir}/lib*.so.%{tallocmajor}*,%{py_platsitedir}/talloc.so}
+chmod +x %{buildroot}{%{_libdir}/lib*.so.%{tallocmajor}*,%{py2_platsitedir}/talloc.so}
 
 %files -n %{libtalloc}
 %{_libdir}/libtalloc.so.%{tallocmajor}*
@@ -119,7 +122,7 @@ chmod +x %{buildroot}{%{_libdir}/lib*.so.%{tallocmajor}*,%{py_platsitedir}/tallo
 #{_datadir}/swig/*/talloc.i
 
 %files -n python-talloc
-%{py_platsitedir}/talloc.so
+%{py2_platsitedir}/talloc.so
 
 %files -n %{libpytalloc}
 %{_libdir}/libpytalloc-util.so.%{tallocmajor}*
