@@ -27,7 +27,7 @@ Source0:	https://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
 %if "%beta" != ""
 Release:	0.%beta.1
 %else
-Release:	1
+Release:	2
 Source1:	https://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.asc
 Source2:	samba-bugs.asc
 %endif
