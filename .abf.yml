@@ -1,6 +1,4 @@
 sources:
   samba-bugs.asc: d2d747817340bc396d4a21670d8b606f436d8925
-  talloc-2.1.14.tar.asc: 1a2d996a3c2eacb3ff6d84ff4b9e49e45738570b
-  talloc-2.1.14.tar.gz: 9d563b768148b620bdae1c97b36cfc30928a1044
-  talloc-2.1.6.tar.asc: 3f432cd9f908280d63511e82226a62306fb66d62
-  talloc-2.1.8.tar.asc: 80662d8c64891cce6fd0d1ce5bb8b3a6fbcb8fdf
+  talloc-2.1.15.tar.asc: da88fd21636a5250a87b3d8baaaab0bef0a16821
+  talloc-2.1.15.tar.gz: 17c74ab8612f17ae1ed65751da1335a5a2d93704

@@ -1,9 +1,9 @@
-%define	tallocmajor	2
-%define	libtalloc	%mklibname talloc %{tallocmajor}
-%define	tallocdev	%mklibname -d talloc
-%define	libpytalloc	%mklibname pytalloc-util %{tallocmajor}
-%define	libpytallocdev	%mklibname -d pytalloc-util
-%define beta		%nil
+%define tallocmajor 2
+%define libtalloc %mklibname talloc %{tallocmajor}
+%define tallocdev %mklibname -d talloc
+%define libpytalloc %mklibname pytalloc-util %{tallocmajor}
+%define libpytallocdev %mklibname -d pytalloc-util
+%define beta %nil
 %define check_sig() export GNUPGHOME=%{_tmppath}/rpm-gpghome \
 if [ -d "$GNUPGHOME" ] \
 then echo "Error, GNUPGHOME $GNUPGHOME exists, remove it and try again"; exit 1 \
@@ -21,13 +21,13 @@ rm -Rf $GNUPGHOME \
 # tar cf talloc-2.0.8.tar talloc-2.0.8
 
 Name:		talloc
-Version:	2.1.14
+Version:	2.1.15
 URL:		https://talloc.samba.org
 Source0:	https://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
 %if "%beta" != ""
 Release:	1.%beta.1
 %else
-Release:	2
+Release:	1
 Source1:	https://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.asc
 Source2:	samba-bugs.asc
 %endif
@@ -42,47 +42,47 @@ BuildRequires:	docbook-style-xsl
 BuildRequires:	pkgconfig(python2)
 
 %description
-Library implementing Samba's memory allocator
+Library implementing Samba's memory allocator.
 
-%package -n	%{libtalloc}
+%package -n %{libtalloc}
 Group:		System/Libraries
 Summary:	Library implementing Samba's memory allocator
 
-%description -n	%{libtalloc}
-Library implementing Samba's memory allocator
+%description -n %{libtalloc}
+Library implementing Samba's memory allocator.
 
-%package -n	%{tallocdev}
+%package -n %{tallocdev}
 Group:		Development/C
 Summary:	Library implementing Samba's memory allocator
 Provides:	talloc-devel = %{EVRD}
 Requires:	%{libtalloc} = %{EVRD}
 BuildRequires:	swig
 
-%description -n	%{tallocdev}
-Library implementing Samba's memory allocator
+%description -n %{tallocdev}
+Library implementing Samba's memory allocator.
 
-%package -n	python-talloc
+%package -n python-talloc
 Group:		Development/Python
 Summary:	Python module for Samba's talloc memory allocator
 
-%description -n	python-talloc
-Python module for Samba's talloc memory allocator
+%description -n python-talloc
+Python module for Samba's talloc memory allocator.
 
-%package -n	%{libpytalloc}
+%package -n %{libpytalloc}
 Group:		Development/C
 Summary:	Utility functions for using talloc objects with Python
 
-%description -n	%{libpytalloc}
-Utility functions for using talloc objects with Python
+%description -n %{libpytalloc}
+Utility functions for using talloc objects with Python.
 
-%package -n	%{libpytallocdev}
+%package -n %{libpytallocdev}
 Group:		Development/C
 Summary:	Utility functions for using talloc objects with Python
 Requires:	%{libpytalloc} = %{EVRD}
 Provides:	pytalloc-util-devel = %{version}-%{release}
 
 %description -n %{libpytallocdev}
-Utility functions for using talloc objects with Python
+Utility functions for using talloc objects with Python.
 
 %prep
 %if "%beta" == ""
@@ -97,7 +97,7 @@ gzip -dc %{SOURCE0} > $VERIFYSOURCE
 rm -f $VERIFYSOURCE
 %endif
 
-%setup -q
+%autosetup -p1
 chmod +r -R .
 
 %build
@@ -105,10 +105,10 @@ sed -i -e 's/env python/env python2/'  buildtools/bin/waf
 export PYTHON=%{__python2}
 %setup_compile_flags
 ./configure --prefix=%{_prefix} --libdir=%{_libdir}
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 chmod +x %{buildroot}{%{_libdir}/lib*.so.%{tallocmajor}*,%{py2_platsitedir}/talloc.so}
 
 %files -n %{libtalloc}
