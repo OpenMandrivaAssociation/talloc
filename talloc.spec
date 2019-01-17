@@ -112,8 +112,16 @@ chmod +r -R .
 sed -i -e 's/env python/env python2/' buildtools/bin/waf
 export PYTHON=%{__python2}
 %setup_compile_flags
-./configure --prefix=%{_prefix} --libdir=%{_libdir}
-%make_build
+./configure \
+    --prefix=%{_prefix} \
+    --libdir=%{_libdir} \
+    --disable-rpath \
+    --disable-rpath-install \
+    --bundled-libraries=NONE \
+    --builtin-libraries=replace \
+    --disable-silent-rules
+
+%make_build V=1
 
 %install
 %make_install
