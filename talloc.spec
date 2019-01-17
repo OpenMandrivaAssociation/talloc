@@ -38,7 +38,13 @@ License:	GPLv3
 Epoch:		1
 Summary:	Library implementing Samba's memory allocator
 Group:		System/Libraries
-BuildRequires:	acl-devel
+BuildRequires:	pkgconfig(libacl)
+BuildRequires:	pkgconfig(libattr)
+BuildRequires:	pkgconfig(zlib)
+BuildRequires:	pkgconfig(libtirpc)
+BuildRequires:	pkgconfig(libnsl)
+BuildRequires:	pkgconfig(libcrypt)
+BuildRequires:	libaio-devel
 BuildRequires:	xsltproc
 BuildRequires:	docbook-style-xsl
 BuildRequires:	pkgconfig(python2)
