@@ -20,6 +20,8 @@ rm -Rf $GNUPGHOME \
 # cp -a buildtools talloc-2.0.8/
 # tar cf talloc-2.0.8.tar talloc-2.0.8
 
+%global optflags %{optflags} -O3
+
 Name:		talloc
 Version:	2.1.15
 URL:		https://talloc.samba.org
