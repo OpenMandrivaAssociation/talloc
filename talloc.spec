@@ -40,6 +40,7 @@ Summary:	Library implementing Samba's memory allocator
 Group:		System/Libraries
 Patch0: 0001-add-mock-disable-static-option.patch
 Patch2: 0002_fix_finding_waf.patch
+Patch3: 0001-Fix-detection-of-HAVE_LARGEFILE-with-python2.patc
 BuildRequires:	pkgconfig(libacl)
 BuildRequires:	pkgconfig(libattr)
 BuildRequires:	pkgconfig(zlib)
@@ -110,13 +111,15 @@ rm -f $VERIFYSOURCE
 %autosetup -p1
 chmod +r -R .
 
+# workaround for hardcoded PATH to waf
+sed -e 's:\.\./\.\./buildtools:./buildtools:' -i Makefile
+
 %build
-sed -i -e 's/env python/env python2/' buildtools/bin/waf
-export PYTHON=%{__python2}
 %setup_compile_flags
 ./configure \
     --prefix=%{_prefix} \
     --libdir=%{_libdir} \
+    --extra-python=%{__python2} \
     --disable-rpath \
     --disable-rpath-install \
     --bundled-libraries=NONE \
