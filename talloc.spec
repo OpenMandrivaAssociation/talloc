@@ -51,6 +51,8 @@ BuildRequires:	libaio-devel
 BuildRequires:	xsltproc
 BuildRequires:	docbook-style-xsl
 BuildRequires:	pkgconfig(python2)
+BuildRequires:	pkgconfig(python)
+BuildRequires:	python3dist(setuptools)
 
 %description
 Library implementing Samba's memory allocator.
