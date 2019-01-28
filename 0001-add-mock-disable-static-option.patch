@@ -1,0 +1,13 @@
+--- talloc-2.1.15/wscript.orig	2019-01-16 13:14:22.356301699 -0800
++++ talloc-2.1.15/wscript	2019-01-16 13:14:48.418057855 -0800
+@@ -27,6 +27,10 @@
+     opt.BUILTIN_DEFAULT('replace')
+     opt.PRIVATE_EXTENSION_DEFAULT('talloc', noextension='talloc')
+     opt.RECURSE('lib/replace')
++    opt.add_option('--disable-static',
++                   help='unused option, added to avoid %configure (RPM) macro break',
++                   action='store_false',
++                   dest='disable_static')
+     if opt.IN_LAUNCH_DIR():
+         opt.add_option('--enable-talloc-compat1',
+                        help=("Build talloc 1.x.x compat library [False]"),
