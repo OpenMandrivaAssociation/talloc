@@ -38,6 +38,8 @@ License:	GPLv3
 Epoch:		1
 Summary:	Library implementing Samba's memory allocator
 Group:		System/Libraries
+Patch0: 0001-add-mock-disable-static-option.patch
+Patch2: 0002_fix_finding_waf.patch
 BuildRequires:	pkgconfig(libacl)
 BuildRequires:	pkgconfig(libattr)
 BuildRequires:	pkgconfig(zlib)
