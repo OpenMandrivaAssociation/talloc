@@ -165,5 +165,6 @@ chmod +x %{buildroot}{%{_libdir}/lib*.so.%{tallocmajor}*,%{py2_platsitedir}/tall
 %files -n %{libpytallocdev}
 %{_includedir}/pytalloc.h
 %{_libdir}/libpytalloc-util.so
+%{_libdir}/libpytalloc-util.cpython*.so
 %{_libdir}/pkgconfig/pytalloc-util.pc
 %{_libdir}/pkgconfig/pytalloc-util.cpython-*.pc
