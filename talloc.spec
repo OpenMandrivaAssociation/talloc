@@ -81,6 +81,13 @@ Summary:	Python module for Samba's talloc memory allocator
 %description -n python-talloc
 Python module for Samba's talloc memory allocator.
 
+%package -n python2-talloc
+Group:		Development/Python
+Summary:	Python module for Samba's talloc memory allocator
+
+%description -n python2-talloc
+Python module for Samba's talloc memory allocator.
+
 %package -n %{libpytalloc}
 Group:		Development/C
 Summary:	Utility functions for using talloc objects with Python
@@ -146,6 +153,10 @@ chmod +x %{buildroot}{%{_libdir}/lib*.so.%{tallocmajor}*,%{py2_platsitedir}/tall
 #{_datadir}/swig/*/talloc.i
 
 %files -n python-talloc
+%{_libdir}/libpytalloc-util.cpython*.so.*
+%{py_sitearch}/talloc.cpython*.so
+
+%files -n python2-talloc
 %{py2_platsitedir}/talloc.so
 
 %files -n %{libpytalloc}
@@ -155,3 +166,4 @@ chmod +x %{buildroot}{%{_libdir}/lib*.so.%{tallocmajor}*,%{py2_platsitedir}/tall
 %{_includedir}/pytalloc.h
 %{_libdir}/libpytalloc-util.so
 %{_libdir}/pkgconfig/pytalloc-util.pc
+%{_libdir}/pkgconfig/pytalloc-util.cpython-*.pc
