@@ -40,7 +40,7 @@ Summary:	Library implementing Samba's memory allocator
 Group:		System/Libraries
 Patch0: 0001-add-mock-disable-static-option.patch
 Patch2: 0002_fix_finding_waf.patch
-Patch3: 0001-Fix-detection-of-HAVE_LARGEFILE-with-python2.patc
+Patch3: 0001-Fix-detection-of-HAVE_LARGEFILE-with-python2.patch
 BuildRequires:	pkgconfig(libacl)
 BuildRequires:	pkgconfig(libattr)
 BuildRequires:	pkgconfig(zlib)
