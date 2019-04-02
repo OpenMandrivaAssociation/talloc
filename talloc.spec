@@ -20,14 +20,12 @@ rm -Rf $GNUPGHOME \
 # cp -a buildtools talloc-2.0.8/
 # tar cf talloc-2.0.8.tar talloc-2.0.8
 
-%global optflags %{optflags} -O3
-
 Name:		talloc
-Version:	2.1.15
+Version:	2.2.0
 URL:		https://talloc.samba.org
 Source0:	https://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
 %if "%beta" != ""
-Release:	1.%beta.1
+Release:	0.%beta.1
 %else
 Release:	1
 Source1:	https://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.asc
@@ -39,8 +37,6 @@ Epoch:		1
 Summary:	Library implementing Samba's memory allocator
 Group:		System/Libraries
 Patch0: 0001-add-mock-disable-static-option.patch
-Patch2: 0002_fix_finding_waf.patch
-Patch3: 0001-Fix-detection-of-HAVE_LARGEFILE-with-python2.patch
 BuildRequires:	pkgconfig(libacl)
 BuildRequires:	pkgconfig(libattr)
 BuildRequires:	pkgconfig(zlib)
@@ -50,7 +46,6 @@ BuildRequires:	pkgconfig(libcrypt)
 BuildRequires:	libaio-devel
 BuildRequires:	xsltproc
 BuildRequires:	docbook-style-xsl
-BuildRequires:	pkgconfig(python2)
 BuildRequires:	pkgconfig(python)
 BuildRequires:	python3dist(setuptools)
 
@@ -77,15 +72,9 @@ Library implementing Samba's memory allocator.
 %package -n python-talloc
 Group:		Development/Python
 Summary:	Python module for Samba's talloc memory allocator
+Obsoletes:	python2-talloc < %{EVRD}
 
 %description -n python-talloc
-Python module for Samba's talloc memory allocator.
-
-%package -n python2-talloc
-Group:		Development/Python
-Summary:	Python module for Samba's talloc memory allocator
-
-%description -n python2-talloc
 Python module for Samba's talloc memory allocator.
 
 %package -n %{libpytalloc}
@@ -106,7 +95,6 @@ Utility functions for using talloc objects with Python.
 
 %prep
 %if "%beta" == ""
-echo "Death to Bush! %beta"
 #Try and validate signatures on source:
 VERIFYSOURCE=%{SOURCE0}
 VERIFYSOURCE=${VERIFYSOURCE%%.gz}
@@ -120,15 +108,11 @@ rm -f $VERIFYSOURCE
 %autosetup -p1
 chmod +r -R .
 
-# workaround for hardcoded PATH to waf
-sed -e 's:\.\./\.\./buildtools:./buildtools:' -i Makefile
-
 %build
 %setup_compile_flags
 ./configure \
     --prefix=%{_prefix} \
     --libdir=%{_libdir} \
-    --extra-python=%{__python2} \
     --disable-rpath \
     --disable-rpath-install \
     --bundled-libraries=NONE \
@@ -139,7 +123,7 @@ sed -e 's:\.\./\.\./buildtools:./buildtools:' -i Makefile
 
 %install
 %make_install
-chmod +x %{buildroot}{%{_libdir}/lib*.so.%{tallocmajor}*,%{py2_platsitedir}/talloc.so}
+chmod +x %{buildroot}%{_libdir}/lib*.so.%{tallocmajor}*
 
 %files -n %{libtalloc}
 %{_libdir}/libtalloc.so.%{tallocmajor}*
@@ -153,18 +137,10 @@ chmod +x %{buildroot}{%{_libdir}/lib*.so.%{tallocmajor}*,%{py2_platsitedir}/tall
 #{_datadir}/swig/*/talloc.i
 
 %files -n python-talloc
-%{_libdir}/libpytalloc-util.cpython*.so.*
+%{_libdir}/libpytalloc*python*.so*
 %{py3_platsitedir}/talloc.cpython*.so
-
-%files -n python2-talloc
-%{py2_platsitedir}/talloc.so
-
-%files -n %{libpytalloc}
-%{_libdir}/libpytalloc-util.so.%{tallocmajor}*
 
 %files -n %{libpytallocdev}
 %{_includedir}/pytalloc.h
-%{_libdir}/libpytalloc-util.so
 %{_libdir}/libpytalloc-util.cpython*.so
-%{_libdir}/pkgconfig/pytalloc-util.pc
 %{_libdir}/pkgconfig/pytalloc-util.cpython-*.pc
