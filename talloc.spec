@@ -1,7 +1,6 @@
 %define tallocmajor 2
 %define libtalloc %mklibname talloc %{tallocmajor}
 %define tallocdev %mklibname -d talloc
-%define libpytalloc %mklibname pytalloc-util %{tallocmajor}
 %define libpytallocdev %mklibname -d pytalloc-util
 %define beta %nil
 %define check_sig() export GNUPGHOME=%{_tmppath}/rpm-gpghome \
@@ -32,8 +31,6 @@ Source1:	https://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.asc
 Source2:	samba-bugs.asc
 %endif
 License:	GPLv3
-# tallocversion was not used when in samba4, so it was 4.0.0
-Epoch:		1
 Summary:	Library implementing Samba's memory allocator
 Group:		System/Libraries
 Patch0: 0001-add-mock-disable-static-option.patch
@@ -77,17 +74,11 @@ Obsoletes:	python2-talloc < %{EVRD}
 %description -n python-talloc
 Python module for Samba's talloc memory allocator.
 
-%package -n %{libpytalloc}
-Group:		Development/C
-Summary:	Utility functions for using talloc objects with Python
-
-%description -n %{libpytalloc}
-Utility functions for using talloc objects with Python.
-
 %package -n %{libpytallocdev}
 Group:		Development/C
 Summary:	Utility functions for using talloc objects with Python
-Requires:	%{libpytalloc} = %{EVRD}
+Requires:	python-talloc = %{EVRD}
+Requires:	%{tallocdev} = %{EVRD}
 Provides:	pytalloc-util-devel = %{version}-%{release}
 
 %description -n %{libpytallocdev}
