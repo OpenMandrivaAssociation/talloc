@@ -23,13 +23,13 @@ rm -Rf $GNUPGHOME \
 # tar cf talloc-2.0.8.tar talloc-2.0.8
 
 Name:		talloc
-Version:	2.4.0
+Version:	2.4.1
 URL:		https://talloc.samba.org
 Source0:	https://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
 %if "%beta" != ""
-Release:	2
+Release:	1
 %else
-Release:	2
+Release:	1
 Source1:	https://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.asc
 Source2:	samba-bugs.asc
 %endif
