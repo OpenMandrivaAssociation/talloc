@@ -26,7 +26,7 @@ Name:		talloc
 Version:	2.4.3
 URL:		https://talloc.samba.org
 Source0:	https://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
-Release:	1
+Release:	2
 %if "%beta" == ""
 Source1:	https://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.asc
 Source2:	samba-bugs.asc
@@ -46,6 +46,7 @@ BuildRequires:	xsltproc
 BuildRequires:	docbook-style-xsl
 BuildRequires:	pkgconfig(python)
 BuildRequires:	python3dist(setuptools)
+BuildRequires:    make
 
 %description
 Library implementing Samba's memory allocator.
