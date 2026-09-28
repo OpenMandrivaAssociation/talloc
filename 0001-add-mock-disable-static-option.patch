@@ -6,7 +6,7 @@ diff --git a/wscript b/wscript
      opt.PRIVATE_EXTENSION_DEFAULT('talloc', noextension='talloc')
      opt.RECURSE('lib/replace')
 +    opt.add_option('--disable-static',
-+                   help='unused option, added to avoid %configure (RPM) macro break',
++                   help='unused option, added to avoid %%configure (RPM) macro break',
 +                   action='store_false',
 +                   dest='disable_static')
      if opt.IN_LAUNCH_DIR():
