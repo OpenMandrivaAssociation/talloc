@@ -26,7 +26,7 @@ Name:		talloc
 Version:	2.5.0
 URL:		https://talloc.samba.org
 Source0:	https://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.gz
-Release:	1
+Release:	2
 %if "%beta" == ""
 Source1:	https://talloc.samba.org/ftp/talloc/talloc-%{version}.tar.asc
 Source2:	samba-bugs.asc
