@@ -121,6 +121,11 @@ chmod +r -R .
 %install
 %make_install
 chmod +x %{buildroot}%{_libdir}/lib*.so.%{tallocmajor}*
+# waf drops the extension into /usr/lib/python3.*/site-packages.
+if ls %{buildroot}%{_prefix}/lib/python3*/site-packages/talloc.cpython*.so >/dev/null 2>&1; then
+	mkdir -p %{buildroot}%{py3_platsitedir}
+	mv %{buildroot}%{_prefix}/lib/python3*/site-packages/talloc.cpython*.so %{buildroot}%{py3_platsitedir}/
+fi
 
 %files -n %{libtalloc}
 %{_libdir}/libtalloc.so.%{tallocmajor}*
